@@ -5,11 +5,11 @@ from mongoDB.mySchema.userSchema import user_schema, users_schema
 from mongoDB.client import db
 from bson import ObjectId
 
-app = APIRouter()
+app = APIRouter(prefix="/user", tags=["User"], responses={status.HTTP_404_NOT_FOUND: {"description": "Not found"}})
 
-@app.get("/", response_model=list[User])
-async def index():
-    return users_schema(db.users.find())
+# @app.get("/", response_model=list[User])
+# async def index():
+#     return users_schema(db.users.find())
 
 @app.post("/", response_model=User)
 async def post_user(user: User):
@@ -50,7 +50,7 @@ async def get_user_by_username(username : str):
 async def user(id: str):
     return search_user("_id", ObjectId(id))
 
-@app.put("/id/{id}")
+@app.put("/id/{id}", response_model=User)
 async def user(id: str, user: User):
     found = db.users.find_one_and_update(
         {"_id": ObjectId(id)},
@@ -71,7 +71,7 @@ async def user(id: str):
         return {"deleted": False}
 
 
-@app.post("/login")
+@app.post("/login", response_model=User)
 async def login(login: Login):
     try:
         find_user = search_user("username", login.username)
