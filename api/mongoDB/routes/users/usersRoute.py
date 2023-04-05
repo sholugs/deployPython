@@ -26,7 +26,7 @@ async def post_user(user: User):
 
     return User(**new_user)
 
-@app.get("/email/{email}", response_model=User)
+@app.get("/email/{email}")
 async def get_user_by_email(email : str):
     try:
         find_user = search_user("email", email)
@@ -36,7 +36,7 @@ async def get_user_by_email(email : str):
     except Exception as e:
         return {"error": str(e)}
 
-@app.get("/username/{username}", response_model=User)
+@app.get("/username/{username}")
 async def get_user_by_username(username : str):
     try:
         find_user = search_user("username", username)
@@ -50,7 +50,7 @@ async def get_user_by_username(username : str):
 async def user(id: str):
     return search_user("_id", ObjectId(id))
 
-@app.put("/id/{id}", response_model=User)
+@app.put("/id/{id}")
 async def user(id: str, user: User):
     found = db.users.find_one_and_update(
         {"_id": ObjectId(id)},
@@ -71,7 +71,7 @@ async def user(id: str):
         return {"deleted": False}
 
 
-@app.post("/login", response_model=User)
+@app.post("/login")
 async def login(login: Login):
     try:
         find_user = search_user("username", login.username)
