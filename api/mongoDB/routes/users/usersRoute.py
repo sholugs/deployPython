@@ -26,7 +26,7 @@ async def post_user(user: User):
 
     return User(**new_user)
 
-@app.get("/email/{email}")
+@app.get("/email/{email}", response_model=User)
 async def get_user_by_email(email : str):
     try:
         find_user = search_user("email", email)
@@ -36,7 +36,7 @@ async def get_user_by_email(email : str):
     except Exception as e:
         return {"error": str(e)}
 
-@app.get("/username/{username}")
+@app.get("/username/{username}", response_model=User)
 async def get_user_by_username(username : str):
     try:
         find_user = search_user("username", username)
