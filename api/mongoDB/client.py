@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 try:
-    db = MongoClient(os.getenv("MONGO_URI"))
+    db = MongoClient("mongodb+srv://sanvaproject:G1TpffE8mFgnT7rs@sanvaproject.admqgp1.mongodb.net/?retryWrites=true&w=majority")
     db_name = "test" 
     db = db[db_name]
     print("Connected to MongoDB")
