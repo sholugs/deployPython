@@ -53,7 +53,7 @@ def search_user(field: str, value):
 
     try:
         user = db.users.find_one({field: value})
-        return User(**user_schema(user)[0])
+        return User(**user_schema(user))
     except Exception as e:
         return {"error": str(e)}
 

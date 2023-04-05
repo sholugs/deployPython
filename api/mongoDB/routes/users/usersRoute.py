@@ -7,9 +7,9 @@ from bson import ObjectId
 
 app = APIRouter(prefix="/user", tags=["User"], responses={status.HTTP_404_NOT_FOUND: {"description": "Not found"}})
 
-# @app.get("/", response_model=list[User])
-# async def index():
-#     return users_schema(db.users.find())
+@app.get("/", response_model=list[User])
+async def index():
+    return users_schema(db.users.find())
 
 @app.post("/", response_model=User)
 async def post_user(user: User):
