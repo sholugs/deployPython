@@ -7,9 +7,9 @@ from bson import ObjectId
 
 app = APIRouter()
 
-# @app.get("/", response_model=list[User])
-# async def index():
-#     return users_schema(db.users.find())
+@app.get("/", response_model=list[User])
+async def index():
+    return users_schema(db.users.find())
 
 @app.post("/", response_model=User)
 async def post_user(user: User):
