@@ -6,6 +6,10 @@ class User(BaseModel):
     username : str
     password : str
     email : str
+    birthdate : str
+    gender : str
+    height : str
+    weight : str
 
 class Login(BaseModel):
     username : str
