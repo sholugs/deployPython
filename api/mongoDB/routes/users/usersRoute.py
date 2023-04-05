@@ -5,7 +5,7 @@ from mongoDB.mySchema.userSchema import user_schema, users_schema
 from mongoDB.client import db
 from bson import ObjectId
 
-app = APIRouter(prefix="/user", tags=["User"], responses={status.HTTP_404_NOT_FOUND: {"description": "Not found"}})
+app = APIRouter()
 
 # @app.get("/", response_model=list[User])
 # async def index():
